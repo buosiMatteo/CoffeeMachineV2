@@ -12,27 +12,101 @@ public class Main {
 
         Technician mike = new Technician("Mike", "password");
 
-        mike.rechargeCoffee(coffeeMachine, 10);
-        mike.rechargeMilk(coffeeMachine, 10);
-
-        User user = new User();
-
-        System.out.print("Insert money in a coffeemachine: ");
+        User user = new User("Matteo");
         Scanner scanner = new Scanner(System.in);
-        Integer centsToInsert = scanner.nextInt();
-        user.insertMoney(coffeeMachine, centsToInsert);
-
-        user.selectCoffee(coffeeMachine, scanner);
-
-        mike.printCoffeeMade(coffeeMachine);
-        mike.printMoneyInside(coffeeMachine);
-
-        user.getRemainder(coffeeMachine);
-
-        mike.printMoneyInside(coffeeMachine);
-
+        String utente;
+        login(coffeeMachine, mike, user, scanner);
+        login(coffeeMachine, mike, user, scanner);
+        scanner.close();
 
     }
 
+    private static void login(CoffeeMachine coffeeMachine, Technician mike, User user, Scanner scanner) {
+        String utente;
+        System.out.print("Insert the username: ");
+        utente = scanner.next();
+        if (utente.equalsIgnoreCase(mike.getUser())) {
+            System.out.print("Insert the password: ");
+            String password = scanner.next();
+            if (mike.getPassword().equals(password)) {
+                technicianMenu(coffeeMachine, mike, scanner);
+            }
+        } else {
+            usersMenu(coffeeMachine, user, scanner);
+        }
+    }
 
+    private static void usersMenu(CoffeeMachine coffeeMachine, User user, Scanner scanner) {
+        boolean hasNextLine = true;
+        while (hasNextLine) {
+            System.out.println("Users menu:");
+            System.out.println("\t - A : Select Coffee");
+            System.out.println("\t - B : Insert money");
+            System.out.println("\t - C : Reclaim change");
+            System.out.println("\t - X : Exit from menu");
+            System.out.print("Select a character for do that action:");
+            char optionChoose = scanner.next().toUpperCase().trim().charAt(0);
+            switch (optionChoose) {
+                case 'A':
+                    user.selectCoffee(coffeeMachine, scanner);
+                    break;
+                case 'B':
+                    System.out.print("Insert money in a coffee machine: ");
+                    Integer centsToInsert = scanner.nextInt();
+                    user.insertMoney(coffeeMachine, centsToInsert);
+                    break;
+                case 'C':
+                    user.getRemainder(coffeeMachine);
+                    break;
+                case 'X':
+                    hasNextLine = false;
+                    break;
+                default:
+                    System.out.println("Letter didn't recognized");
+            }
+        }
+    }
+
+    private static void technicianMenu(CoffeeMachine coffeeMachine, Technician mike, Scanner scanner) {
+        boolean hasNextLine = true;
+        while (hasNextLine) {
+            System.out.println("Menu del tecnico:");
+            System.out.println("\t - A : recharge coffee");
+            System.out.println("\t - B : recharge milk");
+            System.out.println("\t - C : verify quantity of coffee");
+            System.out.println("\t - D : verify quantity of milk");
+            System.out.println("\t - E : print quantity of money in the machine");
+            System.out.println("\t - F : print quantity of coffee that the machine already done");
+            System.out.println("\t - X : Exit from menu");
+
+            System.out.print("Select a character for do that action:");
+            char optionChoose = scanner.next().toUpperCase().trim().charAt(0);
+            switch (optionChoose) {
+                case 'A':
+                    System.out.println("How much coffee do you want refill?");
+                    int coffeeToRefill = scanner.nextInt();
+                    mike.rechargeCoffee(coffeeMachine, coffeeToRefill);
+                    break;
+                case 'B':
+                    System.out.println("How much milk do you want refill?");
+                    int milkToRefill = scanner.nextInt();
+                    mike.rechargeMilk(coffeeMachine, milkToRefill);
+                    break;
+                case 'C':
+                    mike.printCoffeeRemain(coffeeMachine);
+                    break;
+                case 'D':
+                    mike.printMilkRemain(coffeeMachine);
+                    break;
+                case 'E':
+                    mike.printMoneyInside(coffeeMachine);
+                    break;
+                case 'F':
+                    mike.printCoffeeMade(coffeeMachine);
+                    break;
+                case 'X':
+                    hasNextLine = false;
+            }
+        }
+    }
 }

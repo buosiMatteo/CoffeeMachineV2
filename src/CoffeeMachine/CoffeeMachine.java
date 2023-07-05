@@ -62,7 +62,7 @@ public class CoffeeMachine implements CoffeeMachineOperation {
                         System.out.println("Here your Espresso");
                         return new Espresso();
                     } else {
-                        System.out.println("CoffeeMachine.Coffee is not enough");
+                        System.out.println("Coffee is not enough");
                         return null;
                     }
                 case MACCHIATO:
@@ -73,7 +73,7 @@ public class CoffeeMachine implements CoffeeMachineOperation {
                         System.out.println("Here your Macchiato");
                         return new Macchiato();
                     } else {
-                        System.out.println("CoffeeMachine.Coffee or milk is not enough");
+                        System.out.println("Coffee or milk is not enough");
                         return null;
                     }
                 case CAPPUCCINO:

@@ -3,7 +3,12 @@ package Technician;
 import CoffeeMachine.CoffeeMachine;
 import CoffeeMachine.Money;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Technician implements CoffeeMachineOperationTechnician {
+
+    public static Set<Technician> technicians = new HashSet<Technician>();
 
     private String user;
 
@@ -12,11 +17,27 @@ public class Technician implements CoffeeMachineOperationTechnician {
     public Technician(String user, String password) {
         this.user = user;
         this.password = password;
+        technicians.add(this);
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public void rechargeCoffee(CoffeeMachine coffeeMachine, Integer portionOfCoffee) {
-
         coffeeMachine.setPortionOfCoffee(portionOfCoffee);
     }
 
@@ -27,12 +48,12 @@ public class Technician implements CoffeeMachineOperationTechnician {
 
     @Override
     public void printMilkRemain(CoffeeMachine coffeeMachine) {
-        System.out.printf("\t - The portion of milk inside the coffeemachine are: %d", coffeeMachine.getPortionOfMilk());
+        System.out.printf("\t - The portion of milk inside the coffeemachine are: %d\n", coffeeMachine.getPortionOfMilk());
     }
 
     @Override
     public void printCoffeeRemain(CoffeeMachine coffeeMachine) {
-        System.out.printf("\t - The portion of milk inside the coffeemachine are: %d", coffeeMachine.getPortionOfCoffee());
+        System.out.printf("\t - The portion of coffee inside the coffeemachine are: %d\n", coffeeMachine.getPortionOfCoffee());
     }
 
     @Override

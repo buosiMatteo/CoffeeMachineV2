@@ -5,14 +5,24 @@ import CoffeeMachine.CoffeeMachine;
 import CoffeeMachine.TypeOfCoffee;
 import CoffeeMachine.Money;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class User implements CoffeeMachineOperationUser {
 
+    public static Set<User>users = new HashSet<>();
+    private String name;
+
+    public User(String name) {
+        this.name = name;
+        users.add(this);
+    }
 
     @Override
     public Coffee getCoffee(CoffeeMachine coffeeMachine, TypeOfCoffee typeOfCoffee) {
+        System.out.printf("\nHere your %s coffee\n" , typeOfCoffee);
         return coffeeMachine.doCoffee(typeOfCoffee);
     }
 
