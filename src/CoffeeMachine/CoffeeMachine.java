@@ -11,9 +11,9 @@ public class CoffeeMachine implements CoffeeMachineOperation {
 
     private int numberOfCoffeeDone;
 
-    private Integer portionOfCoffee;
+    private int portionOfCoffee;
 
-    private Integer portionOfMilk;
+    private int portionOfMilk;
 
 
     private final Money ammountOfMoney = new Money();
@@ -69,7 +69,7 @@ public class CoffeeMachine implements CoffeeMachineOperation {
                         System.out.println("Here your Espresso");
                         return new Espresso();
                     } else {
-                        System.out.println("Coffee is not enough");
+                        System.out.println("Coffee is not enough to make your ESPRESSO");
                         return null;
                     }
                 case MACCHIATO:
@@ -80,7 +80,7 @@ public class CoffeeMachine implements CoffeeMachineOperation {
                         System.out.println("Here your Macchiato");
                         return new Macchiato();
                     } else {
-                        System.out.println("Coffee or milk is not enough");
+                        System.out.println("Coffee or milk is not enough to make your MACCHIATO");
                         return null;
                     }
                 case CAPPUCCINO:
@@ -91,7 +91,7 @@ public class CoffeeMachine implements CoffeeMachineOperation {
                         System.out.println("Here your Capuccino");
                         return new Capuccino();
                     } else {
-                        System.out.println("CoffeeMachine.Coffee or milk is not enough");
+                        System.out.println("Coffee or milk is not enough to make your CAPUCCINO");
                         return null;
                     }
                 default:
@@ -99,7 +99,7 @@ public class CoffeeMachine implements CoffeeMachineOperation {
                     return null;
             }
         } else {
-            System.out.println("CoffeeMachine.Money is not enought,sorry");
+            System.out.println("Money is not enought,sorry");
             return null;
         }
     }
