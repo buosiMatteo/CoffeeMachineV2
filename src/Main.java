@@ -3,6 +3,7 @@ import Technician.Technician;
 import User.User;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -25,10 +26,10 @@ public class Main {
         String utente;
         System.out.print("Insert the username: ");
         utente = scanner.next();
-        if (utente.equalsIgnoreCase(mike.getUser())) {
+        if (validateUsername(utente, Technician.technicians)) {
             System.out.print("Insert the password: ");
             String password = scanner.next();
-            if (mike.getPassword().equals(password)) {
+            if (validatePassword(password, Technician.technicians)) {
                 technicianMenu(coffeeMachine, mike, scanner);
             }
         } else {
@@ -109,4 +110,22 @@ public class Main {
             }
         }
     }
+
+    public static boolean validateUsername(String user, Set<Technician> technicians) {
+        for (Technician technician : technicians) {
+            if (technician.getUser().equalsIgnoreCase(user)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean validatePassword(String password, Set<Technician> technicians) {
+        for (Technician technician : technicians) {
+            if (technician.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+

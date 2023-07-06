@@ -4,12 +4,12 @@ import CoffeeMachine.CoffeeMachine;
 import CoffeeMachine.Money;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Technician implements CoffeeMachineOperationTechnician {
 
     public static Set<Technician> technicians = new HashSet<Technician>();
-
     private String user;
 
     private String password;
@@ -48,12 +48,12 @@ public class Technician implements CoffeeMachineOperationTechnician {
 
     @Override
     public void printMilkRemain(CoffeeMachine coffeeMachine) {
-        System.out.printf("\t - The portion of milk inside the coffeemachine are: %d\n", coffeeMachine.getPortionOfMilk());
+        System.out.printf("\t - The portion of milk inside the coffee machine are: %d\n", coffeeMachine.getPortionOfMilk());
     }
 
     @Override
     public void printCoffeeRemain(CoffeeMachine coffeeMachine) {
-        System.out.printf("\t - The portion of coffee inside the coffeemachine are: %d\n", coffeeMachine.getPortionOfCoffee());
+        System.out.printf("\t - The portion of coffee inside the coffee machine are: %d\n", coffeeMachine.getPortionOfCoffee());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Technician implements CoffeeMachineOperationTechnician {
 
     @Override
     public void printMoneyInside(CoffeeMachine coffeeMachine) {
-        System.out.printf("\t - The cents inside the Coffemachine are: %d\n", coffeeMachine.getAmmountOfMoney().getCents());
+        System.out.printf("\t - The cents inside the coffee machine are: %d\n", coffeeMachine.getAmmountOfMoney().getCents());
     }
 
     @Override
