@@ -1,9 +1,9 @@
 import CoffeeMachine.CoffeeMachine;
+import CoffeeMachine.Utenti;
 import Technician.Technician;
 import User.User;
 
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
 
@@ -13,31 +13,25 @@ public class Main {
 
         Technician mike = new Technician("Mike", "password");
 
-        User user = new User("Matteo");
+        User utente = new User("Matteo");
         Scanner scanner = new Scanner(System.in);
-        String utente;
-        login(coffeeMachine, mike, user, scanner);
-        login(coffeeMachine, mike, user, scanner);
-        scanner.close();
 
-    }
-
-    private static void login(CoffeeMachine coffeeMachine, Technician mike, User user, Scanner scanner) {
-        String utente;
-        System.out.print("Insert the username: ");
-        utente = scanner.next();
-        if (validateUsername(utente, Technician.technicians)) {
-            System.out.print("Insert the password: ");
-            String password = scanner.next();
-            if (validatePassword(password, Technician.technicians)) {
-                technicianMenu(coffeeMachine, mike, scanner);
+        while (true) {
+            System.out.print("Insert your username: ");
+            String username = scanner.next();
+            coffeeMachine.login(username);
+            if (coffeeMachine.authenticatedUser instanceof Technician) {
+                technicianMenu(coffeeMachine, coffeeMachine.authenticatedUser, scanner);
+            } else if (coffeeMachine.authenticatedUser instanceof User) {
+                usersMenu(coffeeMachine, coffeeMachine.authenticatedUser, scanner);
             }
-        } else {
-            usersMenu(coffeeMachine, user, scanner);
+            //login(coffeeMachine, mike, user, scanner);
+            //login(coffeeMachine, mike, user, scanner);
         }
     }
 
-    private static void usersMenu(CoffeeMachine coffeeMachine, User user, Scanner scanner) {
+    private static void usersMenu(CoffeeMachine coffeeMachine, Utenti utente, Scanner scanner) {
+        User user=(User)utente;
         boolean hasNextLine = true;
         while (hasNextLine) {
             System.out.println("Users menu:");
@@ -68,7 +62,8 @@ public class Main {
         }
     }
 
-    private static void technicianMenu(CoffeeMachine coffeeMachine, Technician mike, Scanner scanner) {
+    private static void technicianMenu(CoffeeMachine coffeeMachine, Utenti user, Scanner scanner) {
+        Technician mike=(Technician)user;
         boolean hasNextLine = true;
         while (hasNextLine) {
             System.out.println("Menu del tecnico:");
@@ -111,15 +106,32 @@ public class Main {
         }
     }
 
-    public static boolean validateUsername(String user, Set<Technician> technicians) {
+    /*
+    private static void login(CoffeeMachine coffeeMachine, Technician mike, User user, Scanner scanner) {
+        String utente;
+        System.out.print("Insert the username: ");
+        utente = scanner.next();
+        if (validateUsername(utente, Technician.technicians)) {
+            System.out.print("Insert the password: ");
+            String password = scanner.next();
+            if (validatePassword(password, Technician.technicians)) {
+                technicianMenu(coffeeMachine, mike, scanner);
+            }
+        } else {
+            usersMenu(coffeeMachine, user, scanner);
+        }
+    }
+
+    public static boolean validateUsername(String user, Map<String, Technician> technicians) {
         for (Technician technician : technicians) {
-            if (technician.getUser().equalsIgnoreCase(user)) {
+            if (technician.getUsername().equalsIgnoreCase(user)) {
                 return true;
             }
         }
         return false;
     }
-    public static boolean validatePassword(String password, Set<Technician> technicians) {
+
+    public static boolean validatePassword(String password, Map<String, Technician> technicians) {
         for (Technician technician : technicians) {
             if (technician.getPassword().equals(password)) {
                 return true;
@@ -127,5 +139,7 @@ public class Main {
         }
         return false;
     }
+
+     */
 }
 

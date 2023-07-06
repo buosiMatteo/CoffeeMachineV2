@@ -8,5 +8,5 @@ public interface CoffeeMachineOperation {
 
     public void chargeMoney(Integer cents);
 
-
+    public void login(String username);
 }

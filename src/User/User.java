@@ -4,20 +4,21 @@ import CoffeeMachine.Coffee;
 import CoffeeMachine.CoffeeMachine;
 import CoffeeMachine.TypeOfCoffee;
 import CoffeeMachine.Money;
+import CoffeeMachine.Utenti;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.Map;
 
 
-public class User implements CoffeeMachineOperationUser {
+public class User extends Utenti implements CoffeeMachineOperationUser {
 
-    public static Set<User>users = new HashSet<>();
-    private String name;
+    public static Map<String, User>users = new HashMap<String, User>();
+    private final String username;
 
-    public User(String name) {
-        this.name = name;
-        users.add(this);
+    public User(String username) {
+        this.username = username;
+        users.put(username, this);
     }
 
     @Override

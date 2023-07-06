@@ -1,31 +1,30 @@
 package Technician;
-
+import CoffeeMachine.Utenti;
 import CoffeeMachine.CoffeeMachine;
 import CoffeeMachine.Money;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-public class Technician implements CoffeeMachineOperationTechnician {
+public class Technician extends Utenti implements CoffeeMachineOperationTechnician {
 
-    public static Set<Technician> technicians = new HashSet<Technician>();
-    private String user;
+    public static Map<String, Technician> technicians = new HashMap<String, Technician>();
+    private String username;
 
     private String password;
 
-    public Technician(String user, String password) {
-        this.user = user;
+    public Technician(String username, String password) {
+        this.username = username;
         this.password = password;
-        technicians.add(this);
+        technicians.put(username,this);
     }
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
